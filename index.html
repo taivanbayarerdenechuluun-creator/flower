@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="mn"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ховор цэцэгт ургамлын сан</title>
+<link rel="stylesheet" href="styles.css"></head><body>
+<section id="home" class="wrap">
+<h1>Ховор цэцэгт ургамлын сан</h1>
+<p class="sub">Монгол улсын Улаан ном (2013)-д бүртгэгдсэн 100 цэцэгт ургамлыг гурван талаас нь үзнэ.</p>
+<div class="tiles">
+<button class="tile t1" data-go="redbook"><span class="ic">📕</span><h2>Монгол улсын Улаан ном</h2><p>Нэн ховор, ховор ургамлын дэлгэрэнгүй мэдээлэл, зураг.</p><span class="n" data-n="redbook"></span></button>
+<button class="tile t2" data-go="redlist"><span class="ic">🌍</span><h2>Дэлхийн ургамлын Улаан дансны сан</h2><p>ДБХХ (IUCN)-ын үнэлгээтэй ургамлууд, олон улс ба бүс нутгийн ангилал.</p><span class="n" data-n="redlist"></span></button>
+<button class="tile t3" data-go="regions"><span class="ic">🗺️</span><h2>Ургах бүс нутаг</h2><p>Хангай, Хэнтий, Монгол Алтай зэрэг бүс нутаг, ургах орчноор нь хайна.</p><span class="n" data-n="regions"></span></button>
+</div></section>
+<section id="view" class="wrap" hidden>
+<div class="top"><button class="back" id="back">← Нүүр</button><h1 id="vt"></h1></div>
+<div class="bar"><div class="f"><input id="q" type="search" placeholder="Нэр, латин нэр, овгоор хайх" aria-label="Хайх">
+<select id="cat" data-v="redbook" aria-label="Улаан номын ангилал"></select>
+<select id="iw" data-v="redlist" aria-label="Олон улсын үнэлгээ"></select>
+<select id="ir" data-v="redlist" aria-label="Бүс нутгийн үнэлгээ"></select>
+<select id="fam" data-v="redbook redlist" aria-label="Овог"></select>
+<select id="col" data-v="redbook" aria-label="Цэцгийн өнгө"></select>
+<select id="mo" data-v="redbook" aria-label="Цэцэглэх сар"></select>
+<select id="hab" data-v="regions" aria-label="Ургах орчин"></select></div>
+<div class="chips" id="regs" data-v="regions" role="group" aria-label="Бүс нутаг"></div>
+<div id="n" aria-live="polite"></div></div>
+<main id="grid"></main>
+<footer id="ft"></footer></section>
+<dialog id="dlg"><button class="x" id="cl">Хаах</button><div id="det"></div></dialog>
+<script src="script.js"></script></body></html>

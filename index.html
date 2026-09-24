@@ -56,7 +56,7 @@
     font-weight: bold;
     color: #888;
     cursor: pointer;
-    display: none; /* Гүйлгэж дуусахаас нааш харагдахгүй */
+    display: none;
 }
 
 .terms-close-btn:hover {
@@ -96,6 +96,27 @@
     cursor: pointer;
     opacity: 1;
 }
+
+/* Зөвхөн эхний хуудасны хамгийн доод хэсэгт байрлуулах CSS */
+#home {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-sizing: border-border;
+}
+
+#home .tiles {
+    flex-grow: 1;
+}
+
+#main-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0 20px 0;
+    width: 100%;
+    margin-top: auto;
+}
 </style>
 </head><body>
 
@@ -128,18 +149,20 @@
 <button class="tile t1" data-go="redbook"><span class="ic">📕</span><h2>Монгол улсын Улаан ном</h2><p>Нэн ховор, ховор ургамлын дэлгэрэнгүй мэдээлэл, зураг.</p><span class="n" data-n="redbook"></span></button>
 <button class="tile t2" data-go="redlist"><span class="ic">🌍</span><h2>Дэлхийн ургамлын Улаан дансны сан</h2><p>ДБХХ (IUCN)-ын үнэлгээтэй ургамлууд, олон улс ба бүс нутгийн ангилал.</p><span class="n" data-n="redlist"></span></button>
 <button class="tile t3" data-go="regions"><span class="ic">🗺️</span><h2>Ургах бүс нутаг</h2><p>Хангай, Хэнтий, Монгол Алтай зэрэг бүс нутаг, ургах орчноор нь хайна.</p><span class="n" data-n="regions"></span></button>
-</div></section>
+</div>
 
-<!-- Дөөд хэсэгт сургуулийн лого болон нэр -->
-<footer id="main-footer" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; z-index: 1000;">
+<!-- ЗӨВХӨН НҮҮР ХУУДСАНД БАЙРЛАХ FOOTER -->
+<footer id="main-footer">
     <div style="display: flex; align-items: center; gap: 10px;">
         <img src="logo.png" alt="Сургуулийн лого" style="height: 32px; width: auto;">
         <span style="color: rgba(255, 255, 255, 0.9); font-size: 14px; font-family: sans-serif; text-align: center;">
-            Хэрэглээний шинжэх ухааны сургууль <br> Ажлал жуулчлалын 3-р курсын оюутанууд
+            Хэрэглээний шинжлэх ухааны сургууль <br> Аялал жуулчлалын 3-р курсын оюутнууд
         </span>
     </div>
 </footer>
+</section>
 
+<!-- ДАНС / ДЭЛГЭРЭНГҮЙ ХАРАХ ХУУДАС (Энд сургуулийн лого харагдахгүй) -->
 <section id="view" class="wrap" hidden>
 <div class="top"><button class="back" id="back">← Нүүр</button><h1 id="vt"></h1></div>
 <div class="bar"><div class="f"><input id="q" type="search" placeholder="Нэр, латин нэр, овгоор хайх" aria-label="Хайх">
@@ -156,7 +179,7 @@
 <footer id="ft"></footer></section>
 <dialog id="dlg"><button class="x" id="cl">Хаах</button><div id="det"></div></dialog>
 
-<!-- 2. ГҮЙЛГЭЖ УНШИЖ ДУУССАНЫГ ШАЛГАХ СКТИПТ -->
+<!-- ГҮЙЛГЭЖ УНШИЖ ДУУССАНЫГ ШАЛГАХ СКРИПТ -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const scrollBox = document.getElementById("termsScrollBox");
@@ -164,17 +187,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeX = document.getElementById("closeTermsX");
     const modal = document.getElementById("termsModal");
 
-    // Гүйлгэх (Scroll) эвэнт
     scrollBox.addEventListener("scroll", function() {
-        // Хэрэв scroll хамгийн доор очсон бол (5px зөрүү тооцсон)
         if (scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 5) {
             acceptBtn.disabled = false;
             acceptBtn.classList.add("active");
-            closeX.style.display = "block"; // "X" товчийг харуулна
+            closeX.style.display = "block";
         }
     });
 
-    // Зөвшөөрөх эсвэл Х товч дарахад поп-ап хаагдана
     function closeModal() {
         if (!acceptBtn.disabled) {
             modal.style.display = "none";

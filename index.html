@@ -2,7 +2,125 @@
 <html lang="mn"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ховор цэцэгт ургамлын сан</title>
-<link rel="stylesheet" href="styles.css"></head><body>
+<link rel="stylesheet" href="styles.css">
+<style>
+/* Үйлчилгээний нөхцөл поп-ап цонхны CSS загвар */
+.terms-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+}
+
+.terms-box {
+    background: #ffffff;
+    color: #333333;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.terms-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+}
+
+.terms-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #1a1a1a;
+}
+
+/* Хаах (X) товч - анхнаасаа нуугдмал эсвэл идэвхгүй байна */
+.terms-close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    display: none; /* Гүйлгэж дуусахаас нааш харагдахгүй */
+}
+
+.terms-close-btn:hover {
+    color: #000;
+}
+
+.terms-content {
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-bottom: 16px;
+    line-height: 1.6;
+    font-size: 14px;
+    flex-grow: 1;
+}
+
+.terms-footer {
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.terms-accept-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: not-allowed;
+    opacity: 0.5;
+    transition: 0.3s;
+}
+
+.terms-accept-btn.active {
+    cursor: pointer;
+    opacity: 1;
+}
+</style>
+</head><body>
+
+<!-- 1. ҮЙЛЧИЛГЭЭНИЙ НӨХЦӨЛ ПОП-АП ЦОНХ -->
+<div id="termsModal" class="terms-overlay">
+    <div class="terms-box">
+        <div class="terms-header">
+            <h2>Өмнөх үг</h2>
+            <button id="closeTermsX" class="terms-close-btn" aria-label="Хаах">✕</button>
+        </div>
+        <div id="termsScrollBox" class="terms-content">
+            <h2>Тавтай морил!</h2>
+            <h3><strong>Монгол орны ургамлын улаан данс:</strong></h3>
+            <p>Дэлхий Байгаль Хамнаалах Холбоо (ДБХХ)-ийн Улаан дансны шалгуураар 2012-2023 онд 6966 зүйл ургамлыг үнэлэхэд устаж байгаа 122, устаж болзошгүй 355, эмзэг 575, ховордож болзошгүй 663 зүйл багтсан байна.</p>
+            <h3><strong>Монгол улсын улаан ном:</strong></h3>
+            <p>Нэн ховор, ховор амьтан, ургамлын талаарх төрийн бодлого, холбогдох хууль тогтоомжийн хэрэгжилтийг шинжлэх ухааны үндэслэлтэйгээр зохион байгуулах зорилгоор Монгол улсын улаан номыг шинэчлэн бичсэн. Энэхүү номонд хөхтөн-6, шувуу-18, мөлхөгч-1, дээд ургамал-95, мөөг-6, хаг-5, хөвд-11, замаг-13, зүйл тус тус шинээр нэмэгджээ. Уг номноос хөхтөн-3, шувуу-13, дээд ургамал-60, хаг-2, хөвд-3, замаг-1 тус тус хасагдаж, нийт амьтан-110, ургамал-192 зүйл тус тус орсон болно.</p>
+            <p style="color: #d9534f; font-weight: bold;">(Санамж: Та энэхүү мэдээллийг хамгийн доод тал хүртэл нь гүйлгэж уншсаны дараа зөвшөөрөх болон хаах товч идэвхжих болно!)</p>
+        </div>
+        <div class="terms-footer">
+            <button id="acceptTermsBtn" class="terms-accept-btn" disabled>Бүрэн уншиж танилцлаа</button>
+        </div>
+    </div>
+</div>
+
+<!-- ВЭБСАЙТНЫ ҮНДСЭН КОД -->
 <section id="home" class="wrap">
 <h1>Ховор цэцэгт ургамлын сан</h1>
 <p class="sub">Монгол улсын Улаан ном (2013)-д бүртгэгдсэн 100 цэцэгт ургамлыг гурван талаас нь үзнэ.</p>
@@ -12,11 +130,13 @@
 <button class="tile t3" data-go="regions"><span class="ic">🗺️</span><h2>Ургах бүс нутаг</h2><p>Хангай, Хэнтий, Монгол Алтай зэрэг бүс нутаг, ургах орчноор нь хайна.</p><span class="n" data-n="regions"></span></button>
 </div></section>
 
-<!-- Дөөд хэсэгт сургуулийн лого болон нэр нэмсэн хэсэг -->
+<!-- Дөөд хэсэгт сургуулийн лого болон нэр -->
 <footer id="main-footer" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; z-index: 1000;">
-    <div style="display: flex; align-items: center; gap: 8px;">
-        <img src="logo.png" alt="Сургуулийн лого" style="height: 30px; width: auto;">
-        <span style="color: rgba(255, 255, 255, 0.9); font-size: 14px; font-family: sans-serif; text-align: center;">Хэрэглээний шинжэх ухааны сургууль <br> Ажлал жуулчлалын 3-р курсын оюутанууд</span>
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="logo.png" alt="Сургуулийн лого" style="height: 32px; width: auto;">
+        <span style="color: rgba(255, 255, 255, 0.9); font-size: 14px; font-family: sans-serif; text-align: center;">
+            Хэрэглээний шинжэх ухааны сургууль <br> Ажлал жуулчлалын 3-р курсын оюутанууд
+        </span>
     </div>
 </footer>
 
@@ -35,4 +155,35 @@
 <main id="grid"></main>
 <footer id="ft"></footer></section>
 <dialog id="dlg"><button class="x" id="cl">Хаах</button><div id="det"></div></dialog>
+
+<!-- 2. ГҮЙЛГЭЖ УНШИЖ ДУУССАНЫГ ШАЛГАХ СКТИПТ -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const scrollBox = document.getElementById("termsScrollBox");
+    const acceptBtn = document.getElementById("acceptTermsBtn");
+    const closeX = document.getElementById("closeTermsX");
+    const modal = document.getElementById("termsModal");
+
+    // Гүйлгэх (Scroll) эвэнт
+    scrollBox.addEventListener("scroll", function() {
+        // Хэрэв scroll хамгийн доор очсон бол (5px зөрүү тооцсон)
+        if (scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 5) {
+            acceptBtn.disabled = false;
+            acceptBtn.classList.add("active");
+            closeX.style.display = "block"; // "X" товчийг харуулна
+        }
+    });
+
+    // Зөвшөөрөх эсвэл Х товч дарахад поп-ап хаагдана
+    function closeModal() {
+        if (!acceptBtn.disabled) {
+            modal.style.display = "none";
+        }
+    }
+
+    acceptBtn.addEventListener("click", closeModal);
+    closeX.addEventListener("click", closeModal);
+});
+</script>
+
 <script src="script.js"></script></body></html>

@@ -1,7 +1,7 @@
 :root{--bg:#eef2ec;--card:#fff;--ink:#1c2b23;--mut:#617067;--line:#d3dccf;--acc:#1f5a3d}
 @media(prefers-color-scheme:dark){:root{--bg:#121a16;--card:#1a2520;--ink:#e6ece4;--mut:#94a49a;--line:#2b3a32;--acc:#8fd1a6}}
 *{box-sizing:border-box}
-body {margin:0;background:linear-gradient(#0000, #0000),url("https://wallpapercave.com/wp/wp14382150.jpg") center/cover no-repeat fixed;color:var(--ink);font:15px/1.55 "Times New Roman",Times,serif
+body {margin:0;background:linear-gradient(#0000, #0000),url("https://wallpapercave.com/wp/wp14382150.jpg") center/cover no-repeat fixed;color:var(--ink);font:15px/1.55 "Times New Roman",Times,serif}
 [hidden]{display:none!important}
 .wrap{max-width:1200px;margin:auto;padding:0 16px}
 h1{margin:0;font-size:clamp(24px,5vw,38px);color:#cdff4e;line-height:1.2;text-align:center}
@@ -24,8 +24,8 @@ h1{margin:0;font-size:clamp(24px,5vw,38px);color:#cdff4e;line-height:1.2;text-al
 .f input{grid-column:span 2}
 input,select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:9px 10px;min-width:0;width:100%}
 select option{color:#1c2b23;background:#fff}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.chips button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:5px 12px;font:inherit;font-size:14px;cursor:pointer}
+.chips{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:6px;margin-top:8px;padding-bottom:4px;scrollbar-width:thin}
+.chips button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:5px 12px;font:inherit;font-size:14px;cursor:pointer}
 .chips button.on{background:var(--acc);border-color:var(--acc);color:var(--bg)}
 #n{color:var(--mut);font-size:13px;margin-top:6px}
 main{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;padding:16px 0 30px}
